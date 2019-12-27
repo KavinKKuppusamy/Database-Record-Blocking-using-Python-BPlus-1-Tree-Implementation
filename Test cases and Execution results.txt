@@ -1,0 +1,94 @@
+Test Case:1
+===========
+Table = Table("person_details")
+
+print("Table Creation\n")
+Table.create_table("person_details")
+
+print("Table Insert\n")
+Table.insert_into_table("person_details", [100, "Dotty", "07.01.2019", "deastup0@google.nl", 62])
+Table.insert_into_table("person_details", [101, "Aksel", "03.01.2019", "agoldson1@tiny.cc", 20])
+Table.insert_into_table("person_details", [102, "Trixie", "02.02.2019", "tdaniellot6@flickr.com", 17])
+Table.insert_into_table("person_details", [103, "Reggy", "01.02.2019", "rlapid9@mtv.com", 53])
+
+Result:
+======
+
+
+Table Creation
+
+person_details table is created
+Table Insert
+
+Record has been successfully added
+Record has been successfully added
+Record has been successfully added
+Record has been successfully added
+=============================================================================================================
+Test Case:2
+===========
+print("Table Record Deletion\n")
+column = "name"
+operator = "="
+value = "Trixie"
+is_not = False
+Table.delete_record("person_details", column, operator, value, is_not)
+records, columns = Table.select_from_table("person_details",['*'])
+print(tabulate(records, headers=columns))
+
+Result:
+======
+Table Record Deletion
+
+  row_id    person_id  name    dob         email                 dept_no
+--------  -----------  ------  ----------  ------------------  ---------
+       1          100  Dotty   07.01.2019  deastup0@google.nl         62
+       2          101  Aksel   03.01.2019  agoldson1@tiny.cc          20
+       4          103  Reggy   01.02.2019  rlapid9@mtv.com            53
+
+==========================================================================================================
+Test case:3
+===========
+print("Table Record Updation\n")
+set_column = "person_id"
+set_value = 125
+cond_column = "name"
+cond_operator = "="
+cond_value = "Reggy"
+is_not = False
+Table.update_record("person_details", set_column, set_value, cond_column, cond_operator, cond_value, is_not)
+records, columns = Table.select_from_table("person_details",['*'])
+print(tabulate(records, headers=columns))
+
+Result:
+========
+Table Record Updation
+
+  row_id    person_id  name    dob         email                 dept_no
+--------  -----------  ------  ----------  ------------------  ---------
+       1          100  Dotty   07.01.2019  deastup0@google.nl         62
+       2          101  Aksel   03.01.2019  agoldson1@tiny.cc          20
+       4          125  Reggy   01.02.2019  rlapid9@mtv.com            53
+
+==================================================================================================================
+Test Case:4
+===========
+print("Table Record Selection\n")
+select_columns = ["name","dob"]
+cond_column = "dept_no"
+cond_operator = ">="
+cond_value = 20
+is_not = False
+records, columns = Table.select_from_table("person_details", select_columns, cond_column, cond_operator, cond_value,
+                                           is_not)
+print(tabulate(records, headers=columns))
+
+Result:
+========
+Table Record Selection
+
+name    dob
+------  ----------
+Dotty   07.01.2019
+Aksel   03.01.2019
+Reggy   01.02.2019
